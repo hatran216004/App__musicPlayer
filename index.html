@@ -14,21 +14,17 @@
         <link rel="stylesheet" href="./assets/CSS/main.css" />
     </head>
     <body>
-        <div class="music-player">
+        <div class="music-player playing">
             <!-- Dashboard -->
             <div class="dashboard">
                 <!-- Header -->
                 <header>
-                    <p class="dashboard__title">Now playing</p>
-                    <p class="dashboard__date">Sting 57th & 9th</p>
+                    <h4 class="dashboard__title">Now playing</h4>
+                    <h2 class="dashboard__heading">String 57th & 9th</h2>
                 </header>
                 <!-- CD -->
-                <div class="cd">
-                    <img
-                        src="./assets/imgs/music-item-img-1.jpg"
-                        class="dashboard__img"
-                        alt=""
-                    />
+                <div class="dashboard__cd">
+                    <div class="dashboard__thumb"></div>
                 </div>
                 <!-- Controls -->
                 <div class="dashboard__control">
@@ -47,6 +43,13 @@
                         />
                     </div>
                     <div class="btn btn-toggle-play">
+                        <!-- Pause -->
+                        <img
+                            src="./assets/icons/pause.svg"
+                            alt=""
+                            class="dashboard__icon-pause"
+                        />
+                        <!-- Play -->
                         <img
                             src="./assets/icons/play.svg"
                             alt=""
@@ -83,90 +86,8 @@
             </div>
 
             <!-- Music list -->
-            <div class="music-list">
-                <ul>
-                    <!-- Item 1 -->
-                    <li class="music-item">
-                        <img
-                            src="./assets/imgs/music-item-img-1.jpg"
-                            alt=""
-                            class="music-item__img"
-                        />
-                        <div>
-                            <h1 class="music-item__title">Nơi Này Có Anh</h1>
-                            <p class="music-item__desc">
-                                NƠI NÀY CÓ ANH | OFFICIAL MUSIC VIDEO | SƠN TÙNG
-                                M-TP
-                            </p>
-                        </div>
-                        <img
-                            src="./assets/icons/setting.svg"
-                            alt=""
-                            class="music-item__setting"
-                        />
-                    </li>
-                    <!-- Item 2 -->
-                    <li class="music-item">
-                        <img
-                            src="./assets/imgs/music-item-img-2.jpg"
-                            alt=""
-                            class="music-item__img"
-                        />
-                        <div>
-                            <h1 class="music-item__title">Thu Cuối</h1>
-                            <p class="music-item__desc">
-                                Thu Cuối - Mr.T ft Yanbi & Hằng Bingboong
-                            </p>
-                        </div>
-                        <img
-                            src="./assets/icons/setting.svg"
-                            alt=""
-                            class="music-item__setting"
-                        />
-                    </li>
-                    <!-- Item 3 -->
-                    <li class="music-item">
-                        <img
-                            src="./assets/imgs/music-item-img-3.jpg"
-                            alt=""
-                            class="music-item__img"
-                        />
-                        <div>
-                            <h1 class="music-item__title">
-                                Muộn rồi mà sao còn
-                            </h1>
-                            <p class="music-item__desc">
-                                SƠN TÙNG M-TP | MUỘN RỒI MÀ SAO CÒN | OFFICIAL
-                                MUSIC VIDEO
-                            </p>
-                        </div>
-                        <img
-                            src="./assets/icons/setting.svg"
-                            alt=""
-                            class="music-item__setting"
-                        />
-                    </li>
-                    <!-- Item 4 -->
-                    <li class="music-item">
-                        <img
-                            src="./assets/imgs/music-item-img-4.jpg"
-                            alt=""
-                            class="music-item__img"
-                        />
-                        <div>
-                            <h1 class="music-item__title">Cứ Chill Thôi</h1>
-                            <p class="music-item__desc">
-                                Cứ Chill Thôi - Chillies (Official Music Video)
-                                ft. Suni Hạ Linh & Rhymastic
-                            </p>
-                        </div>
-                        <img
-                            src="./assets/icons/setting.svg"
-                            alt=""
-                            class="music-item__setting"
-                        />
-                    </li>
-                </ul>
+            <div class="music-bottom">
+                <ul class="music-list"></ul>
             </div>
         </div>
         <script src="./assets/js/main.js"></script>
