@@ -1,10 +1,10 @@
 /**
  * 1. Render songs - OK
  * 2. Scroll top - OK
- * 3. Play / pause / seek
+ * 3. Play / pause / seek - OK
  * 4. CD rotate - OK
  * 5. Next / previous - OK
- * 6. Random
+ * 6. Random - OK
  * 7. Next / Repeat when ended
  * 8. Active song
  * 9. Scroll active song into view
@@ -23,10 +23,12 @@ const playBtn = $(".btn-toggle-play");
 const progress = $("#progress");
 const nextBtn = $(".btn-next");
 const preBtn = $(".btn-prev");
+const randomBtn = $(".btn-random");
 
 const app = {
     currentIndex: 0,
     isPlaying: false,
+    isRandom: false,
     songs: [
         {
             name: "Nơi Này Có Anh",
@@ -188,13 +190,27 @@ const app = {
 
         // Khi next bài hát
         nextBtn.onclick = function () {
-            app.nextSong();
+            if (app.isRandom) {
+                app.ranDomsong();
+            } else {
+                app.nextSong();
+            }
             audio.play();
         };
         // Khi pre bài hát
         preBtn.onclick = function () {
-            app.preSong();
+            if (app.isRandom) {
+                app.ranDomsong();
+            } else {
+                app.preSong();
+            }
             audio.play();
+        };
+
+        // Xử lý bật tắt random song
+        randomBtn.onclick = function () {
+            app.isRandom = !app.isRandom;
+            this.classList.toggle("active", app.isRandom);
         };
     },
 
@@ -217,6 +233,15 @@ const app = {
         if (this.currentIndex < 0) {
             this.currentIndex = this.songs.length - 1;
         }
+        this.loadCurrentSong();
+    },
+    ranDomsong: function () {
+        let newIndex;
+        do {
+            newIndex = Math.floor(Math.random() * app.songs.length);
+        } while (newIndex === this.currentIndex);
+
+        this.currentIndex = newIndex;
         this.loadCurrentSong();
     },
     start: function () {

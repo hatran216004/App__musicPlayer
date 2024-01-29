@@ -22,6 +22,14 @@
     }
 }
 
+.btn {
+    padding: 0 18px;
+
+    &-random.active {
+        filter: var(--filter-primary);
+    }
+}
+
 .dashboard {
     max-width: 460px;
     position: fixed;
@@ -78,7 +86,7 @@
     }
 
     &__control {
-        padding: 20px 40px 0;
+        padding-top: 20px;
         width: 100%;
         display: flex;
         align-items: center;
