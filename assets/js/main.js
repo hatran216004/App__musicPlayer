@@ -14,15 +14,17 @@
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
+const player = $(".music-player");
 const cd = $(".dashboard__cd");
-
 const heading = $(".dashboard__heading");
 const cdThumb = $(".dashboard__thumb");
 const audio = $("#audio");
 const playBtn = $(".btn-toggle-play");
+const progress = $("#progress");
 
 const app = {
     currentIndex: 0,
+    isPlaying: false,
     songs: [
         {
             name: "Nơi Này Có Anh",
@@ -126,6 +128,7 @@ const app = {
     handleEvents: function () {
         const cdWidth = cd.offsetWidth;
 
+        // Xử lý phóng to / thu nhỏ CD
         document.onscroll = function () {
             const scrollTop =
                 window.scrollY || document.documentElement.scrollTop;
@@ -133,6 +136,46 @@ const app = {
 
             cd.style.width = newCdWidth > 0 ? newCdWidth + "px" : 0;
             cd.style.opacity = newCdWidth / cdWidth;
+        };
+
+        // Xử lý khi play
+        playBtn.onclick = function () {
+            if (app.isPlaying) {
+                audio.pause();
+            } else {
+                audio.play();
+            }
+        };
+
+        // Khi nhạc được play
+        audio.onplay = function () {
+            app.isPlaying = true;
+            player.classList.add("playing");
+        };
+
+        // Khi nhạc pause
+        audio.onpause = function () {
+            app.isPlaying = false;
+            player.classList.remove("playing");
+        };
+
+        // Khi tiến độ bài hát thay đổi
+        audio.ontimeupdate = function () {
+            // kiểm tra xem audio.duration có giá trị khác không để tránh chia cho 0
+            if (audio.duration) {
+                // audio.currentTime: Thời điểm hiện tại của audio (đơn vị: giây)
+                // audio.duration: Thời lượng tổng cộng của audio (đơn vị: giây)
+                const progressPercent = Math.floor(
+                    (audio.currentTime / audio.duration) * 100
+                );
+                progress.value = progressPercent;
+            }
+        };
+
+        // Xử lý khi tua bài hát
+        progress.onchange = function (e) {
+            const seekTime = (e.target.value / 100) * audio.duration;
+            audio.currentTime = seekTime;
         };
     },
 
