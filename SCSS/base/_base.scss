@@ -18,12 +18,9 @@ html {
 body {
     font-size: 1.6rem;
     font-family: "Roboto", sans-serif;
-    background-image: radial-gradient(
-        circle 369px at -2.9% 12.9%,
-        rgba(247, 234, 163, 1) 0%,
-        rgba(236, 180, 238, 0.56) 46.4%,
-        rgba(163, 203, 247, 1) 100.7%
-    );
+    background-image: url(../imgs/body-bg.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 @keyframes spinner {

@@ -5,7 +5,7 @@
  * 4. CD rotate - OK
  * 5. Next / previous - OK
  * 6. Random - OK
- * 7. Next / Repeat when ended
+ * 7. Next / Repeat when ended - OK
  * 8. Active song
  * 9. Scroll active song into view
  * 10. Play song when click
@@ -24,11 +24,13 @@ const progress = $("#progress");
 const nextBtn = $(".btn-next");
 const preBtn = $(".btn-prev");
 const randomBtn = $(".btn-random");
+const repeatBtn = $(".btn-repeat");
 
 const app = {
     currentIndex: 0,
     isPlaying: false,
     isRandom: false,
+    isRepeat: false,
     songs: [
         {
             name: "Nơi Này Có Anh",
@@ -92,9 +94,11 @@ const app = {
         },
     ],
     render: function () {
-        const htmls = this.songs.map((song) => {
+        const htmls = this.songs.map((song, index) => {
             return `
-                <li class="music-item">
+                <li class="music-item ${
+                    index === this.currentIndex ? "active" : ""
+                }">
                     <img
                         src="${song.img}"
                         alt=""
@@ -139,7 +143,7 @@ const app = {
         // Xử lý phóng to / thu nhỏ CD
         document.onscroll = function () {
             const scrollTop =
-                window.scrollY || document.documentElement.scrollTop;
+                document.documentElement.scrollTop || window.scrollY;
             const newCdWidth = cdWidth - scrollTop;
 
             cd.style.width = newCdWidth > 0 ? newCdWidth + "px" : 0;
@@ -196,6 +200,9 @@ const app = {
                 app.nextSong();
             }
             audio.play();
+            const musicItemActive = $(".music-item.active");
+            musicItemActive.classList.remove("active");
+            musicItemActive.nextElementSibling.classList.add("active");
         };
         // Khi pre bài hát
         preBtn.onclick = function () {
@@ -205,12 +212,30 @@ const app = {
                 app.preSong();
             }
             audio.play();
+            const musicItemActive = $(".music-item.active");
+            musicItemActive.classList.remove("active");
+            musicItemActive.previousElementSibling.classList.add("active");
         };
 
         // Xử lý bật tắt random song
         randomBtn.onclick = function () {
             app.isRandom = !app.isRandom;
             this.classList.toggle("active", app.isRandom);
+        };
+
+        // Xử lý bật tắt repeat song
+        repeatBtn.onclick = function () {
+            app.isRepeat = !app.isRepeat;
+            this.classList.toggle("active", app.isRepeat);
+        };
+
+        // Xử lý next/replay bài hát khi audio ended
+        audio.onended = function () {
+            if (app.isRepeat) {
+                audio.play();
+            } else {
+                nextBtn.click();
+            }
         };
     },
 
@@ -235,6 +260,7 @@ const app = {
         }
         this.loadCurrentSong();
     },
+    // Random bài hát
     ranDomsong: function () {
         let newIndex;
         do {
