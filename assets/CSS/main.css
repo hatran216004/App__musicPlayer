@@ -217,9 +217,7 @@ body {
 .dashboard__thumb {
   width: 100%;
   padding-top: 100%;
-  background: url(../../assets/imgs/music-item-img-1.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
+  background: url(../../assets/imgs/music-item-img-1.jpg) center/cover no-repeat;
   border-radius: 50%;
 }
 .dashboard__control {
