@@ -2,8 +2,8 @@
  * 1. Render songs - OK
  * 2. Scroll top - OK
  * 3. Play / pause / seek
- * 4. CD rotate
- * 5. Next / previous
+ * 4. CD rotate - OK
+ * 5. Next / previous - OK
  * 6. Random
  * 7. Next / Repeat when ended
  * 8. Active song
@@ -21,6 +21,8 @@ const cdThumb = $(".dashboard__thumb");
 const audio = $("#audio");
 const playBtn = $(".btn-toggle-play");
 const progress = $("#progress");
+const nextBtn = $(".btn-next");
+const preBtn = $(".btn-prev");
 
 const app = {
     currentIndex: 0,
@@ -50,42 +52,36 @@ const app = {
             path: "./assets/music/music-4.mp3",
             img: "./assets/imgs/music-item-img-4.jpg",
         },
-        ,
         {
             name: "Giá Như Em Nhìn Lại",
             singer: "JSOL x VIRUSS",
             path: "./assets/music/music-5.mp3",
             img: "./assets/imgs/music-item-img-5.jpg",
         },
-        ,
         {
             name: "Nàng Thơ",
             singer: "Hoàng Dũng",
             path: "./assets/music/music-6.mp3",
             img: "./assets/imgs/music-item-img-6.jpg",
         },
-        ,
         {
             name: "Phố Cũ Còn Anh",
             singer: "Quinn ft Chilly",
             path: "./assets/music/music-7.mp3",
             img: "./assets/imgs/music-item-img-7.jpg",
         },
-        ,
         {
             name: "Suýt Nữa Thì",
             singer: "ANDIEZ x BITI'S HUNTER",
             path: "./assets/music/music-8.mp3",
             img: "./assets/imgs/music-item-img-8.jpg",
         },
-        ,
         {
             name: "Cảm Nắng",
             singer: "Suni Hạ Linh",
             path: "./assets/music/music-9.mp3",
             img: "./assets/imgs/music-item-img-9.jpg",
         },
-        ,
         {
             name: "Ngỏ Lời",
             singer: "Suni Hạ Linh",
@@ -189,6 +185,17 @@ const app = {
             const seekTime = (e.target.value / 100) * audio.duration;
             audio.currentTime = seekTime;
         };
+
+        // Khi next bài hát
+        nextBtn.onclick = function () {
+            app.nextSong();
+            audio.play();
+        };
+        // Khi pre bài hát
+        preBtn.onclick = function () {
+            app.preSong();
+            audio.play();
+        };
     },
 
     loadCurrentSong: function () {
@@ -196,7 +203,22 @@ const app = {
         cdThumb.style.backgroundImage = `url('${this.currentSong.img}')`;
         audio.src = this.currentSong.path;
     },
-
+    // Bài hát tiếp theo
+    nextSong: function () {
+        this.currentIndex++;
+        if (this.currentIndex >= this.songs.length) {
+            this.currentIndex = 0;
+        }
+        this.loadCurrentSong();
+    },
+    // Bài hát trước đó
+    preSong: function () {
+        this.currentIndex--;
+        if (this.currentIndex < 0) {
+            this.currentIndex = this.songs.length - 1;
+        }
+        this.loadCurrentSong();
+    },
     start: function () {
         // Định nghĩa các thuộc tính cho object
         this.defineProperties();
