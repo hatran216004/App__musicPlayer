@@ -173,8 +173,9 @@ body {
   max-width: 100%;
   position: relative;
   background-color: #4158d0;
-  border-radius: 6px;
   background-image: radial-gradient(circle 588px at 31.7% 40.2%, rgb(225, 200, 239) 21.4%, rgb(163, 225, 233) 57.1%);
+  border-bottom-right-radius: 6px;
+  border-bottom-left-radius: 6px;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
 }
 .music-player.playing .dashboard__icon-pause {
@@ -197,7 +198,7 @@ body {
   position: fixed;
   top: 0;
   left: 50%;
-  translate: -50% 0;
+  translate: -50.1% 0;
   width: 100%;
   background-color: #4158d0;
   background-image: radial-gradient(circle 588px at 31.7% 40.2%, rgb(225, 200, 239) 21.4%, rgb(163, 225, 233) 57.1%);

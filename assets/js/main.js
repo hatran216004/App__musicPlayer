@@ -6,8 +6,8 @@
  * 5. Next / previous - OK
  * 6. Random - OK
  * 7. Next / Repeat when ended - OK
- * 8. Active song
- * 9. Scroll active song into view
+ * 8. Active song - OK
+ * 9. Scroll active song into view - OK
  * 10. Play song when click
  */
 
@@ -200,9 +200,20 @@ const app = {
                 app.nextSong();
             }
             audio.play();
+
             const musicItemActive = $(".music-item.active");
             musicItemActive.classList.remove("active");
-            musicItemActive.nextElementSibling.classList.add("active");
+            const nextItem = musicItemActive.nextElementSibling;
+
+            if (nextItem) {
+                nextItem.classList.add("active");
+            } else {
+                // Nếu không có phần tử tiếp theo, thì chọn phần tử đầu tiên trong danh sách
+                const firstItem = $(".music-item:first-child");
+                firstItem.classList.add("active");
+            }
+
+            app.scrollToActiveSong();
         };
         // Khi pre bài hát
         preBtn.onclick = function () {
@@ -212,9 +223,23 @@ const app = {
                 app.preSong();
             }
             audio.play();
+
             const musicItemActive = $(".music-item.active");
+
             musicItemActive.classList.remove("active");
-            musicItemActive.previousElementSibling.classList.add("active");
+
+            const previousItem = musicItemActive.previousElementSibling;
+
+            // Nếu có phần tử trước đó, thêm class "active" cho nó
+            if (previousItem) {
+                previousItem.classList.add("active");
+            } else {
+                // Nếu không có phần tử trước đó, thì chọn phần tử cuối cùng trong danh sách
+                const lastItem = $(".music-item:last-child");
+                lastItem.classList.add("active");
+            }
+
+            app.scrollToActiveSong();
         };
 
         // Xử lý bật tắt random song
@@ -238,7 +263,28 @@ const app = {
             }
         };
     },
-
+    scrollToActiveSong: function () {
+        if (this.currentIndex <= 2) {
+            $(".music-item.active").scrollIntoView({
+                behavior: "smooth",
+                block: "center",
+            });
+        } else if (this.currentIndex === app.songs.length) {
+            setTimeout(() => {
+                $(".music-item.active").scrollIntoView({
+                    behavior: "smooth",
+                    block: "center",
+                });
+            }, 200);
+        } else {
+            setTimeout(() => {
+                $(".music-item.active").scrollIntoView({
+                    behavior: "smooth",
+                    block: "nearest",
+                });
+            }, 200);
+        }
+    },
     loadCurrentSong: function () {
         heading.textContent = this.currentSong.name;
         cdThumb.style.backgroundImage = `url('${this.currentSong.img}')`;
@@ -260,6 +306,7 @@ const app = {
         }
         this.loadCurrentSong();
     },
+
     // Random bài hát
     ranDomsong: function () {
         let newIndex;
@@ -268,6 +315,7 @@ const app = {
         } while (newIndex === this.currentIndex);
 
         this.currentIndex = newIndex;
+
         this.loadCurrentSong();
     },
     start: function () {
