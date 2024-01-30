@@ -28,8 +28,6 @@
 }
 
 .btn {
-    padding: 0 18px;
-
     &-random.active,
     &-repeat.active {
         filter: var(--filter-primary);
@@ -109,7 +107,7 @@
     }
 
     &__control {
-        padding-top: 20px;
+        padding: 20px 16px 0;
         width: 100%;
         display: flex;
         align-items: center;
