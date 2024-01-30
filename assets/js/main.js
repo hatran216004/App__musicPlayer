@@ -205,20 +205,21 @@ const app = {
             if (app.isRandom) {
                 app.ranDomsong();
             } else {
-                const musicItemActive = $(".music-item.active");
-                musicItemActive.classList.remove("active");
-                const nextItem = musicItemActive.nextElementSibling;
-
-                if (nextItem) {
-                    nextItem.classList.add("active");
-                } else {
-                    // Nếu không có phần tử tiếp theo, thì chọn phần tử đầu tiên trong danh sách
-                    const firstItem = $(".music-item:first-child");
-                    firstItem.classList.add("active");
-                }
                 app.nextSong();
             }
+            // const musicItemActive = $(".music-item.active");
+            // musicItemActive.classList.remove("active");
+            // const nextItem = musicItemActive.nextElementSibling;
+
+            // if (nextItem) {
+            //     nextItem.classList.add("active");
+            // } else {
+            //     // Nếu không có phần tử tiếp theo, thì chọn phần tử đầu tiên trong danh sách
+            //     const firstItem = $(".music-item:first-child");
+            //     firstItem.classList.add("active");
+            // }
             audio.play();
+            app.render();
 
             app.scrollToActiveSong();
         };
@@ -227,23 +228,24 @@ const app = {
             if (app.isRandom) {
                 app.ranDomsong();
             } else {
-                const musicItemActive = $(".music-item.active");
-
-                musicItemActive.classList.remove("active");
-
-                const previousItem = musicItemActive.previousElementSibling;
-
-                // Nếu có phần tử trước đó, thêm class "active" cho nó
-                if (previousItem) {
-                    previousItem.classList.add("active");
-                } else {
-                    // Nếu không có phần tử trước đó, thì chọn phần tử cuối cùng trong danh sách
-                    const lastItem = $(".music-item:last-child");
-                    lastItem.classList.add("active");
-                }
                 app.preSong();
             }
+            // const musicItemActive = $(".music-item.active");
+
+            // musicItemActive.classList.remove("active");
+
+            // const previousItem = musicItemActive.previousElementSibling;
+
+            // // Nếu có phần tử trước đó, thêm class "active" cho nó
+            // if (previousItem) {
+            //     previousItem.classList.add("active");
+            // } else {
+            //     // Nếu không có phần tử trước đó, thì chọn phần tử cuối cùng trong danh sách
+            //     const lastItem = $(".music-item:last-child");
+            //     lastItem.classList.add("active");
+            // }
             audio.play();
+            app.render();
 
             app.scrollToActiveSong();
         };
