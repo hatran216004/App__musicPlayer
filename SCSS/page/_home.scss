@@ -190,7 +190,8 @@ input[type="range"] {
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
     transition: opacity 0.25s, box-shadow 0.25s;
 
-    &.active {
+    &.active,
+    &:active {
         background-color: #ef5c91;
 
         & .music-item__title,
@@ -222,7 +223,6 @@ input[type="range"] {
     }
 
     &__desc {
-        max-width: 220px;
         margin-top: 4px;
         font-size: 1.4rem;
         font-weight: 400;

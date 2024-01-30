@@ -312,10 +312,10 @@ input[type=range] {
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
   transition: opacity 0.25s, box-shadow 0.25s;
 }
-.music-item.active {
+.music-item.active, .music-item:active {
   background-color: #ef5c91;
 }
-.music-item.active .music-item__title, .music-item.active .music-item__desc, .music-item.active .music-item__setting {
+.music-item.active .music-item__title, .music-item.active .music-item__desc, .music-item.active .music-item__setting, .music-item:active .music-item__title, .music-item:active .music-item__desc, .music-item:active .music-item__setting {
   color: #fff;
   filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(231deg) brightness(102%) contrast(101%);
 }
@@ -336,7 +336,6 @@ input[type=range] {
   line-height: 140%;
 }
 .music-item__desc {
-  max-width: 220px;
   margin-top: 4px;
   font-size: 1.4rem;
   font-weight: 400;
